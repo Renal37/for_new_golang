@@ -1,0 +1,443 @@
+-------------Первая моя задача на вывод имени у пользователя и вывод его имени------
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	var name string
+
+	fmt.Println("Введи свое имя ")
+
+	fmt.Scan(&name)
+
+	fmt.Printf("Привет %s!", name)
+}
+
+
+--------------Вторая задача типо как калькулятор только простой----------------
+package main
+
+import (
+	"fmt"
+)
+
+type NumberInterface interface {
+	Sum() int
+	Substract() int
+	Multiply() int
+	Division() float64
+}
+
+type Number struct {
+	number1 int
+	number2 int
+}
+
+func (n Number) Sum() int {
+	return n.number1 + n.number2
+}
+
+func (n Number) Substract() int {
+	return n.number1 - n.number2
+}
+
+func (n Number) Multiply() int {
+	return n.number1 * n.number2
+}
+
+func (n Number) Division() float64 {
+	return float64(n.number1) / float64(n.number2)
+}
+
+func main() {
+	var i NumberInterface
+	var num1 int
+	var num2 int
+	fmt.Println("Введи 1 число!")
+	fmt.Scan(&num1)
+	fmt.Println("Введи 2 число!")
+	fmt.Scan(&num2)
+	numbers := Number{num1, num2}
+	i = numbers
+
+	fmt.Printf("Cумма = %d\nВычетание = %d\nУмножение = %d\nДеление = %f\n", i.Sum(), i.Substract(), i.Multiply(), i.Division())
+}
+
+
+-------------Третья задача четное или нечетное ----------
+package main
+
+import (
+	"fmt"
+)
+
+
+func main() {
+	var num int
+	fmt.Println("Введите число")
+	fmt.Scan(&num)
+
+	if num % 2 == 0 {
+		fmt.Println("Число четное")
+	}else{
+		fmt.Printf("Число нечетное")
+	}
+}
+
+----------Четвертая задача сумма и среднее арифметическое-------------
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	arr := make([]int, 5)
+	fmt.Println("Введи 5 чисел!")
+	fmt.Scan(&arr[0], &arr[1], &arr[2], &arr[3], &arr[4])
+	sum := 0
+	var con float64
+	for _, el := range arr {
+		sum += el
+		con = float64(sum) / float64(len(arr))
+	}
+	fmt.Printf("Сумма=%d\nCреднее арифметическое=%f\n", sum, con)
+}
+
+
+-----------Пятая задача Min и Max --------------
+
+package main
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+	arr := make([]int, 5)
+	fmt.Println("Введи 5 чисел!")
+	fmt.Scan(&arr[0], &arr[1], &arr[2], &arr[3], &arr[4])
+	
+	// Поиск минимального и максимального
+	minVal := math.MaxInt64
+	maxVal := math.MinInt64
+	
+	for _, el := range arr {
+		if el < minVal {
+			minVal = el
+		}
+		if el > maxVal {
+			maxVal = el
+		}
+	}
+	
+	fmt.Printf("Минимальное число = %d\nМаксимальное число = %d\n", minVal, maxVal)
+}
+
+-----------Шестая задача FizzBuzz ---------------
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	for i := 0; i <= 100; i++ {
+		if i%3 == 0 && i%5 == 0 {
+			fmt.Println("FizzBuzz")
+		} else if i%5 == 0 {
+			fmt.Println("Buzz")
+		} else if i%3 == 0 {
+			fmt.Println("Fizz")
+		}
+	}
+}
+Первый вариант
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	for i := 0; i <= 100; i++ {
+		switch {
+		case i%3 == 0 && i%5 == 0:
+			fmt.Println("FizzBuzz")
+		case i%5 == 0:
+			fmt.Println("Buzz")
+		case i%3 == 0:
+			fmt.Println("Fizz")
+		default:
+			fmt.Println(i)
+		}
+	}
+}
+Второй вариант 
+
+----------Cедьмая задача Функция для проверки палиндрома----------
+
+package main
+
+import (
+	"fmt"
+)
+
+func isPalindrome(s string) bool {
+    runes := []rune(s)
+    length := len(runes)
+    for i := 0; i < length/2; i++ {
+        if runes[i] == runes[length-1-i] {
+            return true
+        }
+    }
+    return false
+    
+}
+func main() {
+	    testStrings := []string{
+        "топот",
+        "hello",
+        "12321",
+    }
+    
+    for _, s := range testStrings {
+        fmt.Printf("'%s' -> %t\n", s, isPalindrome(s))
+    }
+}
+
+------------Возьмая задача сумма среза------
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	numbers := []int{2, 2, 3, 4, 5, 6}
+	sum := 0
+	for _, el := range numbers {
+		sum += el
+	}
+    fmt.Println("Cумма=",sum)
+}
+
+-----------Девятая задача найди число в срезе----------
+package main
+
+import (
+	"fmt"
+)
+
+func serch(s []int) int {
+	num := 2
+	for i, el := range s {
+		if num == el {
+			return i
+		}
+	}
+	return -1
+}
+
+func main() {
+	numbers := []int{2, 2, 3, 4, 3, 2}
+
+	fmt.Println(serch(numbers))
+}
+-------------Десятая задача по фильтрации среза ---------
+package main
+
+import (
+	"fmt"
+)
+
+func new(s []int) []int {
+	new_slice := []int{}
+	for _, el := range s {
+		if el%2 == 0 {
+			new_slice = append(new_slice, el)
+		}
+	}
+	return new_slice
+}
+
+func main() {
+	numbers := []int{1, 2, 3, 4, 3, 24}
+
+	fmt.Println("Новый слайс четных чисел", new(numbers))
+}
+
+-----------Одиннадцатое задача структура прямоугльника ----------
+package main
+
+import (
+	"fmt"
+)
+
+type Rectangle struct {
+	width  float64
+	height float64
+}
+
+func (r Rectangle) Area() float64 {
+	return r.width * r.height
+}
+func (r Rectangle) Perimeter() float64 {
+    if r.width == r.height{
+        return r.width*4
+    }
+	return (r.width + r.height)/2
+}
+
+func main() {
+	var width float64
+	var height float64
+	fmt.Println("Введите ширину")
+	fmt.Scan(&width)
+	fmt.Println("Введите длинну")
+	fmt.Scan(&height)
+	rec := Rectangle{width, height}
+	fmt.Printf("Площадь прямоугольника = %f\nПериметр прямоугольника = %f", rec.Area(), rec.Perimeter())
+
+}
+
+------------Сделал не сам но задача --------------------
+// Напишите методы: 
+// AddGrade(grade int) - добавляет оценку
+// Average() float64 - вычисляет средний балл
+
+
+
+
+package main
+
+import (
+	"fmt"
+)
+
+type Student struct {
+	name   string
+	grades []int
+}
+
+func (s *Student) AddGrade(numbers int) {
+	s.grades = append(s.grades, numbers)
+}
+
+func (s Student) Average() float64 {
+	sum := 0
+	for _, el := range s.grades {
+		sum += el
+	}
+	return float64(sum) / float64(len(s.grades))
+}
+
+func main() {
+	var name string
+	var count int
+	fmt.Println("Введите имя студента")
+	fmt.Scan(&name)
+	student := Student{name: name, grades: []int{}}
+	fmt.Println("Сколько оценок хотите ввести?")
+	fmt.Scan(&count)
+	 for i := 0; i < count; i++ {
+        var grade int
+        fmt.Printf("Введите оценку %d: ", i+1)
+        fmt.Scan(&grade)
+        student.AddGrade(grade)
+    }
+    
+    average := student.Average()
+    fmt.Printf("Средний балл студента %s: %.2f\n", student.name, average)
+}
+
+
+----------------- Напишите функцию, которая генерирует случайный пароль заданной длины(ТАКЖЕ НЕ САМ ЧУТКА ПОМОГ)-------------
+
+package main
+
+import (
+	"fmt"
+  "math/rand"
+)
+func generatePassword(length int) string {
+    chars := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?"
+    password := make([]byte, length)
+    for i := range password {
+        password[i] = chars[rand.Intn(len(chars))]
+    }
+    return string(password)
+}
+
+func main() {
+	var len int
+	fmt.Println("Введите длину пароля")
+	fmt.Scan(&len)
+	fmt.Println("Ваш пароль",generatePassword(len))
+}
+
+
+------------------Напишите функцию, которая проверяет корректность email адреса-----------------
+package main
+
+import (
+	"fmt"
+)
+
+func isValidEmail(email string) bool {
+	runes := []rune(email)
+	length := len(runes)
+	for _, r := range runes {
+		if r == '@' {
+			return true
+		}
+	}
+	if length <= 4 {
+		return false
+	}
+	return true
+}
+
+func main() {
+	var email string
+	fmt.Println("Введите свою почту")
+	fmt.Scan(&email)
+	fmt.Println([]rune(email))
+	if isValidEmail(email) {
+		fmt.Println("Ваш пароль проходит валидацию")
+	} else {
+		fmt.Println("Ваш пароль проходит не валидацию")
+	}
+}
+
+------------------ Конвертер температур -----------------
+package main
+
+import (
+	"fmt"
+)
+
+func konvertTemp(temp int,v int) float64 {
+	if v == 1 {
+		return (float64(temp) - 32) * (5.0 / 9.0)
+	} else if v == 2 {
+		return (float64(temp) * (9.0 / 5.0)) + 32
+	} else {
+		return 0
+	}
+}
+
+func main() {
+	var variant int
+	var temp int 
+	fmt.Printf("Выберите вариант конвертации \nФаренгейтом в Цельсии - 1 \nЦельсии в Фаренгейтом - 2\n")
+	fmt.Scan(&variant)
+	fmt.Println("Введите температуру")
+	fmt.Scan(&temp)
+	fmt.Println("Конвертированная температура",konvertTemp(temp,variant))
+}
