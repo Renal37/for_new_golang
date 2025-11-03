@@ -4,22 +4,33 @@ import (
 	"fmt"
 )
 
-func konvertTemp(temp int,v int) float64 {
-	if v == 1 {
-		return (float64(temp) - 32) * (5.0 / 9.0)
-	} else if v == 2 {
-		return (float64(temp) * (9.0 / 5.0)) + 32
+func sumArray(numbers []int) int {
+	var sum int
+	len := len(numbers)
+	if len != 0 {
+		for _, el := range numbers {
+				sum +=el
+		}
 	} else {
-		return 0
+		return sum
 	}
+	return sum
 }
 
 func main() {
-	var variant int
-	var temp int 
-	fmt.Printf("Выберите вариант конвертации \nФаренгейтом в Цельсии - 1 \nЦельсии в Фаренгейтом - 2\n")
-	fmt.Scan(&variant)
-	fmt.Println("Введите температуру")
-	fmt.Scan(&temp)
-	fmt.Println("Конвертированная температура",konvertTemp(temp,variant))
+var nums []int
+	var num int
+	
+	fmt.Println("Введите числа (для завершения введите любой нечисловой символ):")
+	
+	for {
+		_, err := fmt.Scan(&num)
+		if err != nil {
+			break
+		}
+		nums = append(nums, num)
+	}
+	
+	fmt.Println("Исходный срез:", nums)
+	fmt.Println("Сумма:", sumArray(nums))
 }
